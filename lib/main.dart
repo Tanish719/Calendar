@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:calenderapp/Events.dart';
+import 'package:calenderapp/fab.dart';
 
 void main() {
   runApp(const MyApp());
@@ -51,49 +53,57 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    // ignore: prefer_const_constructors
     return Scaffold(
-        body: SafeArea(
-            child: SfCalendar(
-      view: CalendarView.month,
-      headerStyle: CalendarHeaderStyle(
-        textAlign: TextAlign.center,
-        backgroundColor: Colors.orange[800],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Events()),
+          );
+        },
+        child: const Icon(Icons.navigation),
+        backgroundColor: Colors.green,
       ),
-      allowedViews: [
-        CalendarView.week,
-        CalendarView.month,
-      ],
-      timeSlotViewSettings: TimeSlotViewSettings(
-        timeIntervalHeight: 100,
-      ),
-      dataSource: MeetingDataSource(_getDataSource()),
-      showNavigationArrow: true,
-      todayHighlightColor: Colors.red,
-      showCurrentTimeIndicator: true,
-      showWeekNumber: true,
-      weekNumberStyle: WeekNumberStyle(
-        backgroundColor: Colors.orange[900],
-        textStyle: TextStyle(color: Colors.white, fontSize: 15),
-      ),
-      monthViewSettings: MonthViewSettings(
-          //appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
-          appointmentDisplayCount: 2,
-          showAgenda: true,
-          agendaItemHeight: 80,
-          agendaStyle: AgendaStyle(
-              backgroundColor: Color(0xFF424242),
-              dateTextStyle: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-              ),
-              dayTextStyle: TextStyle(
-                color: Colors.white,
-                fontSize: 25,
-                fontFamily: 'Source Sans Pro',
-              ))),
-    )),
-    onPressed: () => Navigator.of(context).push(
-      MaterialPageRoute(builder: context) => EventEditingPage()),
+      body: SafeArea(
+          child: SfCalendar(
+        view: CalendarView.month,
+        headerStyle: CalendarHeaderStyle(
+          textAlign: TextAlign.center,
+        ),
+        allowedViews: [
+          CalendarView.week,
+          CalendarView.month,
+        ],
+        timeSlotViewSettings: TimeSlotViewSettings(
+          timeIntervalHeight: 100,
+        ),
+        dataSource: MeetingDataSource(_getDataSource()),
+        showNavigationArrow: true,
+        todayHighlightColor: Colors.red,
+        showCurrentTimeIndicator: true,
+        showWeekNumber: true,
+        weekNumberStyle: WeekNumberStyle(
+          backgroundColor: Colors.orange[900],
+          textStyle: TextStyle(color: Colors.white, fontSize: 15),
+        ),
+        monthViewSettings: MonthViewSettings(
+            //appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
+            appointmentDisplayCount: 2,
+            showAgenda: true,
+            agendaItemHeight: 80,
+            agendaStyle: AgendaStyle(
+                backgroundColor: Color(0xFF424242),
+                dateTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+                dayTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontFamily: 'Source Sans Pro',
+                ))),
+      )),
     );
   }
 }
@@ -108,6 +118,8 @@ List<Meeting> _getDataSource() {
       'Conference', startTime, endTime, const Color(0xFF0F8644), false));
   meetings.add(Meeting(
       'Kill Aditi', startTime, endTime, const Color(0xFFC51162), false));
+  meetings.add(Meeting('Doctor', DateTime(2021, 12, 18, 10),
+      DateTime(2021, 12, 18, 12), Colors.purple, false));
   return meetings;
 }
 
@@ -150,4 +162,21 @@ class Meeting {
   DateTime to;
   Color background;
   bool isAllDay;
+}
+
+class Button extends StatelessWidget {
+  const Button({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+// Add your onPressed code here!
+        },
+        child: const Icon(Icons.plus),
+        backgroundColor: Colors.green,
+      ),
+    );
+  }
 }
