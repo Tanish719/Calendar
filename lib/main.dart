@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
+
         //
         // Try running your application with "flutter run". You'll see the
         // application has a blue toolbar. Then, without quitting the app, try
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.orange,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -62,12 +63,28 @@ class _MyHomePageState extends State<MyHomePage> {
             MaterialPageRoute(builder: (context) => Events()),
           );
         },
-        child: const Icon(Icons.navigation),
-        backgroundColor: Colors.green,
+        child: const Icon(Icons.add),
+        backgroundColor: Colors.orange,
       ),
       body: SafeArea(
           child: SfCalendar(
         view: CalendarView.month,
+        monthCellBuilder:
+            (BuildContext buildContext, MonthCellDetails details) {
+          final Color defaultColor =
+              Theme.of(context).brightness == Brightness.dark
+                  ? Colors.black54
+                  : Colors.white;
+          return Container(
+            decoration: BoxDecoration(
+                border: Border.all(color: defaultColor, width: 0.5)),
+            child: Center(
+              child: Text(
+                details.date.day.toString(),
+              ),
+            ),
+          );
+        },
         headerStyle: CalendarHeaderStyle(
           textAlign: TextAlign.center,
         ),
@@ -85,10 +102,15 @@ class _MyHomePageState extends State<MyHomePage> {
         showWeekNumber: true,
         weekNumberStyle: WeekNumberStyle(
           backgroundColor: Colors.orange[900],
-          textStyle: TextStyle(color: Colors.white, fontSize: 15),
+          textStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 15,
+          ),
         ),
+        showDatePickerButton: true,
         monthViewSettings: MonthViewSettings(
             //appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
+            showTrailingAndLeadingDates: false,
             appointmentDisplayCount: 2,
             showAgenda: true,
             agendaItemHeight: 80,
@@ -162,21 +184,4 @@ class Meeting {
   DateTime to;
   Color background;
   bool isAllDay;
-}
-
-class Button extends StatelessWidget {
-  const Button({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-// Add your onPressed code here!
-        },
-        child: const Icon(Icons.plus),
-        backgroundColor: Colors.green,
-      ),
-    );
-  }
 }

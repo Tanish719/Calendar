@@ -13,6 +13,8 @@ class Events extends StatelessWidget {
               MaterialPageRoute(builder: (context) => MyApp()),
             );
           },
+          backgroundColor: Colors.orange,
+          child: Icon(Icons.add),
         ),
         body: Center(child: Text('Hello')));
   }
