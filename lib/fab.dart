@@ -1,19 +1,25 @@
-import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class Button extends StatelessWidget {
-  const Button({Key? key}) : super(key: key);
+class Utils {
+  static String toDateTime(DateTime dateTime) {
+    final date = DateFormat.yMMMEd().format(dateTime);
+    final time = DateFormat.Hm().format(dateTime);
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: const Center(child: Text('Press the button below!')),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-// Add your onPressed code here!
-        },
-        child: const Icon(Icons.navigation),
-        backgroundColor: Colors.green,
-      ),
-    );
+    return '$date $time';
   }
+
+  static String toDate(DateTime dateTime) {
+    final date = DateFormat.yMMMEd().format(dateTime);
+
+    return '$date';
+  }
+
+  static String toTime(DateTime dateTime) {
+    final time = DateFormat.Hm().format(dateTime);
+
+    return '$time';
+  }
+
+  static DateTime removeTime(DateTime dateTime) =>
+      DateTime(dateTime.year, dateTime.month, dateTime.day);
 }

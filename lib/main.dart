@@ -1,7 +1,11 @@
+import 'package:calenderapp/event_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:calenderapp/Events.dart';
 import 'package:calenderapp/fab.dart';
+import 'package:calenderapp/event_provider.dart';
+import 'package:calenderapp/event_data_source.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,25 +16,26 @@ class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+        create: (context) => EventProvider(),
+        child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            // This is the theme of your application.
 
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.orange,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
+            //
+            // Try running your application with "flutter run". You'll see the
+            // application has a blue toolbar. Then, without quitting the app, try
+            // changing the primarySwatch below to Colors.green and then invoke
+            // "hot reload" (press "r" in the console where you ran "flutter run",
+            // or simply save your changes to "hot reload" in a Flutter IDE).
+            // Notice that the counter didn't reset back to zero; the application
+            // is not restarted.
+            primarySwatch: Colors.orange,
+          ),
+          home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        ),
+      );
 }
 
 class MyHomePage extends StatefulWidget {
@@ -54,13 +59,13 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    // ignore: prefer_const_constructors
+    final events = Provider.of<EventProvider>(context).events;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Events()),
+            MaterialPageRoute(builder: (context) => EventEditingPage()),
           );
         },
         child: const Icon(Icons.add),
@@ -69,6 +74,10 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SafeArea(
           child: SfCalendar(
         view: CalendarView.month,
+        onLongPress: (details) {
+          final provider = Provider.of<EventProvider>(context, listen: false);
+          provider.setDate(details.date!);
+        },
         monthCellBuilder:
             (BuildContext buildContext, MonthCellDetails details) {
           final Color defaultColor =
@@ -95,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
         timeSlotViewSettings: TimeSlotViewSettings(
           timeIntervalHeight: 100,
         ),
-        dataSource: MeetingDataSource(_getDataSource()),
+        dataSource: EventDataSource(events),
         showNavigationArrow: true,
         todayHighlightColor: Colors.red,
         showCurrentTimeIndicator: true,
