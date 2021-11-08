@@ -1,7 +1,11 @@
+import 'package:calenderapp/event_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:calenderapp/Events.dart';
 import 'package:calenderapp/fab.dart';
+import 'package:calenderapp/event_provider.dart';
+import 'package:calenderapp/event_data_source.dart';
 
 void main() {
   runApp(const MyApp());
@@ -53,13 +57,13 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    // ignore: prefer_const_constructors
+    final events = Provider.of<EventProvider>(context).events;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Events()),
+            MaterialPageRoute(builder: (context) => EventEditingPage()),
           );
         },
         child: const Icon(Icons.add),
@@ -68,6 +72,26 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SafeArea(
           child: SfCalendar(
         view: CalendarView.month,
+        onLongPress: (details) {
+          final provider = Provider.of<EventProvider>(context, listen: false);
+          provider.setDate(details.date!);
+        },
+        monthCellBuilder:
+            (BuildContext buildContext, MonthCellDetails details) {
+          final Color defaultColor =
+              Theme.of(context).brightness == Brightness.dark
+                  ? Colors.black54
+                  : Colors.white;
+          return Container(
+            decoration: BoxDecoration(
+                border: Border.all(color: defaultColor, width: 0.5)),
+            child: Center(
+              child: Text(
+                details.date.day.toString(),
+              ),
+            ),
+          );
+        },
         headerStyle: CalendarHeaderStyle(
           textAlign: TextAlign.center,
         ),
@@ -78,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
         timeSlotViewSettings: TimeSlotViewSettings(
           timeIntervalHeight: 100,
         ),
-        dataSource: MeetingDataSource(_getDataSource()),
+        dataSource: EventDataSource(events),
         showNavigationArrow: true,
         todayHighlightColor: Color(0xFF457B9D),
         showCurrentTimeIndicator: true,
@@ -90,6 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
         showDatePickerButton: true,
         monthViewSettings: MonthViewSettings(
             //appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
+            showTrailingAndLeadingDates: false,
             appointmentDisplayCount: 2,
             showAgenda: true,
             agendaItemHeight: 80,
