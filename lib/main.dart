@@ -106,15 +106,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         dataSource: EventDataSource(events),
         showNavigationArrow: true,
-        todayHighlightColor: Colors.red,
+        todayHighlightColor: Color(0xFF457B9D),
         showCurrentTimeIndicator: true,
         showWeekNumber: true,
         weekNumberStyle: WeekNumberStyle(
-          backgroundColor: Colors.orange[900],
-          textStyle: TextStyle(
-            color: Colors.white,
-            fontSize: 15,
-          ),
+          backgroundColor: Color(0xFF1D3557),
+          textStyle: TextStyle(color: Color(0xFFDAD1D4), fontSize: 15),
         ),
         showDatePickerButton: true,
         monthViewSettings: MonthViewSettings(
@@ -124,13 +121,13 @@ class _MyHomePageState extends State<MyHomePage> {
             showAgenda: true,
             agendaItemHeight: 80,
             agendaStyle: AgendaStyle(
-                backgroundColor: Color(0xFF424242),
+                backgroundColor: Color(0xFF555566),
                 dateTextStyle: TextStyle(
-                  color: Colors.white,
+                  color: Color(0xFFDAD1D4),
                   fontSize: 20,
                 ),
                 dayTextStyle: TextStyle(
-                  color: Colors.white,
+                  color: Color(0xFFDAD1D4),
                   fontSize: 25,
                   fontFamily: 'Source Sans Pro',
                 ))),
@@ -138,6 +135,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-
-
