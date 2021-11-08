@@ -4,6 +4,7 @@ import 'package:calenderapp/main.dart';
 import 'package:calenderapp/fab.dart';
 import 'package:provider/provider.dart';
 import 'package:calenderapp/event_provider.dart';
+import 'package:random_color/random_color.dart';
 
 class EventEditingPage extends StatefulWidget {
   final Event? event;
@@ -231,6 +232,17 @@ class _EventEditingPageState extends State<EventEditingPage> {
   }
 }
 
+List<Color> randomcolos = [
+  Colors.blue,
+  Colors.pink,
+  Colors.yellow,
+  Colors.lightGreen,
+  Colors.orange,
+  Colors.purple,
+  Colors.brown,
+  Colors.red,
+];
+
 class Event {
   final String title;
   final String description;
@@ -244,6 +256,6 @@ class Event {
       required this.description,
       required this.from,
       required this.to,
-      this.backgroundcolor = Colors.lightGreen,
+      this.backgroundcolor: Colors.red,
       this.isAllDay = false});
 }
