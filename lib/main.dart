@@ -69,8 +69,11 @@ class _MyHomePageState extends State<MyHomePage> {
             MaterialPageRoute(builder: (context) => EventEditingPage()),
           );
         },
-        child: const Icon(Icons.add),
-        backgroundColor: Color(0xFF1D3557),
+        child: const Icon(
+          Icons.add,
+          color: Colors.blue,
+        ),
+        backgroundColor: Colors.white,
       ),
       body: SafeArea(
           child: SfCalendar(
@@ -96,8 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         },
         headerStyle: CalendarHeaderStyle(
-          textAlign: TextAlign.center,
-        ),
+            textAlign: TextAlign.center, textStyle: TextStyle()),
         allowedViews: [
           CalendarView.week,
           CalendarView.month,

@@ -4,7 +4,6 @@ import 'package:calenderapp/main.dart';
 import 'package:calenderapp/fab.dart';
 import 'package:provider/provider.dart';
 import 'package:calenderapp/event_provider.dart';
-import 'package:random_color/random_color.dart';
 
 class EventEditingPage extends StatefulWidget {
   final Event? event;
