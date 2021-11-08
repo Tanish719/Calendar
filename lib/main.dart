@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blueGrey,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -62,8 +62,8 @@ class _MyHomePageState extends State<MyHomePage> {
             MaterialPageRoute(builder: (context) => Events()),
           );
         },
-        child: const Icon(Icons.navigation),
-        backgroundColor: Colors.green,
+        child: const Icon(Icons.add),
+        backgroundColor: Color(0xFF1D3557),
       ),
       body: SafeArea(
           child: SfCalendar(
@@ -80,26 +80,27 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         dataSource: MeetingDataSource(_getDataSource()),
         showNavigationArrow: true,
-        todayHighlightColor: Colors.red,
+        todayHighlightColor: Color(0xFF457B9D),
         showCurrentTimeIndicator: true,
         showWeekNumber: true,
         weekNumberStyle: WeekNumberStyle(
-          backgroundColor: Colors.orange[900],
-          textStyle: TextStyle(color: Colors.white, fontSize: 15),
+          backgroundColor: Color(0xFF1D3557),
+          textStyle: TextStyle(color: Color(0xFFDAD1D4), fontSize: 15),
         ),
+        showDatePickerButton: true,
         monthViewSettings: MonthViewSettings(
             //appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
             appointmentDisplayCount: 2,
             showAgenda: true,
             agendaItemHeight: 80,
             agendaStyle: AgendaStyle(
-                backgroundColor: Color(0xFF424242),
+                backgroundColor: Color(0xFF555566),
                 dateTextStyle: TextStyle(
-                  color: Colors.white,
+                  color: Color(0xFFDAD1D4),
                   fontSize: 20,
                 ),
                 dayTextStyle: TextStyle(
-                  color: Colors.white,
+                  color: Color(0xFFDAD1D4),
                   fontSize: 25,
                   fontFamily: 'Source Sans Pro',
                 ))),
@@ -115,9 +116,9 @@ List<Meeting> _getDataSource() {
       DateTime(today.year, today.month, today.day, 9, 0, 0);
   final DateTime endTime = startTime.add(const Duration(hours: 2));
   meetings.add(Meeting(
-      'Conference', startTime, endTime, const Color(0xFF0F8644), false));
+      'Conference', startTime, endTime, const Color(0xFF2F9C95), false));
   meetings.add(Meeting(
-      'Kill Aditi', startTime, endTime, const Color(0xFFC51162), false));
+      'Kill Aditi', startTime, endTime, const Color(0xFFA04668), false));
   meetings.add(Meeting('Doctor', DateTime(2021, 12, 18, 10),
       DateTime(2021, 12, 18, 12), Colors.purple, false));
   return meetings;
@@ -164,19 +165,4 @@ class Meeting {
   bool isAllDay;
 }
 
-class Button extends StatelessWidget {
-  const Button({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-// Add your onPressed code here!
-        },
-        child: const Icon(Icons.plus),
-        backgroundColor: Colors.green,
-      ),
-    );
-  }
-}
