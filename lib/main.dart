@@ -68,6 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
             context,
             MaterialPageRoute(builder: (context) => EventEditingPage()),
           );
+          
         },
         child: const Icon(
           Icons.add,
@@ -77,6 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: SafeArea(
           child: SfCalendar(
+        
         view: CalendarView.month,
         onLongPress: (details) {
           final provider = Provider.of<EventProvider>(context, listen: false);
@@ -135,7 +137,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontSize: 25,
                   fontFamily: 'Source Sans Pro',
                 ))),
+        
       )),
     );
   }
+  
 }
+
+
+

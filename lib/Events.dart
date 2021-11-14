@@ -30,6 +30,12 @@ class _EventEditingPageState extends State<EventEditingPage> {
     if (widget.event == null) {
       fromDate = DateTime.now();
       toDate = DateTime.now().add(Duration(hours: 2));
+    } else {
+      final event = widget.event!;
+
+      titleController.text = event.title;
+      fromDate = event.from;
+      toDate = event.to;
     }
   }
 
@@ -43,6 +49,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
+          backgroundColor: Color(0xFF1D3557),
           leading: CloseButton(),
           actions: buildEditingActions(),
         ),
@@ -223,8 +230,15 @@ class _EventEditingPageState extends State<EventEditingPage> {
         to: toDate,
         isAllDay: false,
       );
+      final isEditing = widget.event != null;
       final provider = Provider.of<EventProvider>(context, listen: false);
-      provider.addEvent(event);
+      if (isEditing) {
+        provider.editEvent(event, widget.event!);
+
+        Navigator.of(context).pop();
+      } else {
+        provider.addEvent(event);
+      }
 
       Navigator.of(context).pop();
     }
