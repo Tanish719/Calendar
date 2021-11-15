@@ -1,6 +1,9 @@
 # calenderapp
 
 A new Flutter project.
+Event Features
+Time running in the background
+
 
 ## Getting Started
 

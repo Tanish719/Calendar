@@ -11,6 +11,7 @@ import 'package:calenderapp/event_data_source.dart';
 void main() {
   runApp(const MyApp());
 }
+// ignore_for_file: prefer_const_constructors
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -71,13 +72,18 @@ class _MyHomePageState extends State<MyHomePage> {
             context,
             MaterialPageRoute(builder: (context) => EventEditingPage()),
           );
+          
         },
-        child: const Icon(Icons.add),
-        backgroundColor: Color(0xFF1D3557),
+        child: const Icon(
+          Icons.add,
+          color: Colors.blue,
+        ),
+        backgroundColor: Colors.white,
       ),
       body: SafeArea(
         
           child: SfCalendar(
+        
         view: CalendarView.month,
         
         onLongPress: (details) {
@@ -101,8 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         },
         headerStyle: CalendarHeaderStyle(
-          textAlign: TextAlign.center,
-        ),
+            textAlign: TextAlign.center, textStyle: TextStyle()),
         allowedViews: [
           CalendarView.week,
           CalendarView.month,
@@ -110,6 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
         timeSlotViewSettings: TimeSlotViewSettings(
           timeIntervalHeight: 100,
         ),
+        initialSelectedDate: DateTime.now(),
         dataSource: EventDataSource(events),
         showNavigationArrow: true,
         initialSelectedDate: DateTime.now(),
@@ -138,7 +144,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontSize: 25,
                   fontFamily: 'Source Sans Pro',
                 ))),
+        
       )),
     );
   }
+  
 }
+
+
+
