@@ -1,5 +1,6 @@
 import 'package:calenderapp/event_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_time_patterns.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:calenderapp/Events.dart';
@@ -22,7 +23,9 @@ class MyApp extends StatelessWidget {
           title: 'Flutter Demo',
           theme: ThemeData(
             // This is the theme of your application.
-
+            accentColor: Color(0xFF457B9D),
+              brightness: Brightness.dark,
+              primaryColor: Colors.amber,
             //
             // Try running your application with "flutter run". You'll see the
             // application has a blue toolbar. Then, without quitting the app, try
@@ -32,12 +35,13 @@ class MyApp extends StatelessWidget {
             // Notice that the counter didn't reset back to zero; the application
             // is not restarted.
             primarySwatch: Colors.blueGrey,
+            scaffoldBackgroundColor: Color(0xFF121222),
           ),
           home: const MyHomePage(title: 'Flutter Demo Home Page'),
         ),
       );
 }
-
+  
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
@@ -72,8 +76,10 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Color(0xFF1D3557),
       ),
       body: SafeArea(
+        
           child: SfCalendar(
         view: CalendarView.month,
+        
         onLongPress: (details) {
           final provider = Provider.of<EventProvider>(context, listen: false);
           provider.setDate(details.date!);
@@ -106,6 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         dataSource: EventDataSource(events),
         showNavigationArrow: true,
+        initialSelectedDate: DateTime.now(),
         todayHighlightColor: Color(0xFF457B9D),
         showCurrentTimeIndicator: true,
         showWeekNumber: true,
