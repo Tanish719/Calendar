@@ -1,5 +1,6 @@
 import 'package:calenderapp/event_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_time_patterns.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:calenderapp/Events.dart';
@@ -33,13 +34,14 @@ class MyApp extends StatelessWidget {
             // or simply save your changes to "hot reload" in a Flutter IDE).
             // Notice that the counter didn't reset back to zero; the application
             // is not restarted.
-            primarySwatch: Colors.red,
+            primarySwatch: Colors.blueGrey,
+            scaffoldBackgroundColor: Color(0xFF121222),
           ),
           home: const MyHomePage(title: 'Flutter Demo Home Page'),
         ),
       );
 }
-
+  
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
@@ -77,8 +79,10 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.white,
       ),
       body: SafeArea(
+        
           child: SfCalendar(
         view: CalendarView.month,
+        
         onLongPress: (details) {
           final provider = Provider.of<EventProvider>(context, listen: false);
           provider.setDate(details.date!);
