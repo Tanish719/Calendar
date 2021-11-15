@@ -23,8 +23,9 @@ class MyApp extends StatelessWidget {
           title: 'Flutter Demo',
           theme: ThemeData(
             // This is the theme of your application.
-
-            //
+            brightness: Brightness.light,
+            accentColor: Colors.red,
+            primaryColor: Colors.black,
             // Try running your application with "flutter run". You'll see the
             // application has a blue toolbar. Then, without quitting the app, try
             // changing the primarySwatch below to Colors.green and then invoke
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
             // or simply save your changes to "hot reload" in a Flutter IDE).
             // Notice that the counter didn't reset back to zero; the application
             // is not restarted.
-            primarySwatch: Colors.blueGrey,
+            primarySwatch: Colors.red,
           ),
           home: const MyHomePage(title: 'Flutter Demo Home Page'),
         ),
@@ -68,17 +69,15 @@ class _MyHomePageState extends State<MyHomePage> {
             context,
             MaterialPageRoute(builder: (context) => EventEditingPage()),
           );
-          
         },
         child: const Icon(
           Icons.add,
-          color: Colors.blue,
+          color: Colors.red,
         ),
         backgroundColor: Colors.white,
       ),
       body: SafeArea(
           child: SfCalendar(
-        
         view: CalendarView.month,
         onLongPress: (details) {
           final provider = Provider.of<EventProvider>(context, listen: false);
@@ -101,7 +100,8 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         },
         headerStyle: CalendarHeaderStyle(
-            textAlign: TextAlign.center, textStyle: TextStyle()),
+            textAlign: TextAlign.center,
+            textStyle: TextStyle(fontSize: 18, fontStyle: FontStyle.italic)),
         allowedViews: [
           CalendarView.week,
           CalendarView.month,
@@ -112,37 +112,42 @@ class _MyHomePageState extends State<MyHomePage> {
         initialSelectedDate: DateTime.now(),
         dataSource: EventDataSource(events),
         showNavigationArrow: true,
-        todayHighlightColor: Color(0xFF457B9D),
+        todayHighlightColor: Colors.red,
         showCurrentTimeIndicator: true,
         showWeekNumber: true,
         weekNumberStyle: WeekNumberStyle(
-          backgroundColor: Color(0xFF1D3557),
-          textStyle: TextStyle(color: Color(0xFFDAD1D4), fontSize: 15),
+          backgroundColor: Colors.red,
+          textStyle: TextStyle(
+            color: Colors.black87,
+            fontSize: 15,
+          ),
         ),
         showDatePickerButton: true,
         monthViewSettings: MonthViewSettings(
             //appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
             showTrailingAndLeadingDates: false,
-            appointmentDisplayCount: 2,
+            monthCellStyle: MonthCellStyle(backgroundColor: Colors.transparent),
+            appointmentDisplayCount: 10,
             showAgenda: true,
-            agendaItemHeight: 80,
+            agendaItemHeight: 70,
             agendaStyle: AgendaStyle(
-                backgroundColor: Color(0xFF555566),
-                dateTextStyle: TextStyle(
-                  color: Color(0xFFDAD1D4),
-                  fontSize: 20,
-                ),
-                dayTextStyle: TextStyle(
-                  color: Color(0xFFDAD1D4),
-                  fontSize: 25,
-                  fontFamily: 'Source Sans Pro',
-                ))),
-        
+              backgroundColor: Colors.black,
+              dateTextStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+              ),
+              appointmentTextStyle: TextStyle(
+                color: Colors.black,
+              ),
+              dayTextStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 25,
+                fontFamily: 'Source Sans Pro',
+              ),
+            )),
       )),
     );
+    
   }
   
 }
-
-
-

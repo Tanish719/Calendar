@@ -1,4 +1,4 @@
-import 'package:calenderapp/main.dart';
+
 import 'package:flutter/material.dart';
 import 'package:calenderapp/main.dart';
 import 'package:calenderapp/fab.dart';
@@ -49,7 +49,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(0xFF1D3557),
+          backgroundColor: Colors.red,
           leading: CloseButton(),
           actions: buildEditingActions(),
         ),
@@ -269,6 +269,6 @@ class Event {
       required this.description,
       required this.from,
       required this.to,
-      this.backgroundcolor: Colors.red,
+      this.backgroundcolor: Colors.purpleAccent,
       this.isAllDay = false});
 }
