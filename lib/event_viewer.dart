@@ -20,9 +20,7 @@ class EventDetails extends StatelessWidget {
             title: Text(
               event.title,
             ),
-            subtitle: Text(
-              event.from
-            ),
+            subtitle: Text('text'),
           )
         ],
       ),

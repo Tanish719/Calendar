@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
             // This is the theme of your application.
             brightness: Brightness.light,
             accentColor: Colors.red,
-            primaryColor: Colors.black,
+            primaryColor: Colors.white,
             // Try running your application with "flutter run". You'll see the
             // application has a blue toolbar. Then, without quitting the app, try
             // changing the primarySwatch below to Colors.green and then invoke
@@ -34,14 +34,13 @@ class MyApp extends StatelessWidget {
             // or simply save your changes to "hot reload" in a Flutter IDE).
             // Notice that the counter didn't reset back to zero; the application
             // is not restarted.
-            primarySwatch: Colors.blueGrey,
-            scaffoldBackgroundColor: Color(0xFF121222),
+            primarySwatch: Colors.red,
           ),
           home: const MyHomePage(title: 'Flutter Demo Home Page'),
         ),
       );
 }
-  
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
@@ -79,79 +78,79 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.white,
       ),
       body: SafeArea(
-        
+          bottom: false,
           child: SfCalendar(
-        view: CalendarView.month,
-        
-        onLongPress: (details) {
-          final provider = Provider.of<EventProvider>(context, listen: false);
-          provider.setDate(details.date!);
-        },
-        monthCellBuilder:
-            (BuildContext buildContext, MonthCellDetails details) {
-          final Color defaultColor =
-              Theme.of(context).brightness == Brightness.dark
-                  ? Colors.black54
-                  : Colors.white;
-          return Container(
-            decoration: BoxDecoration(
-                border: Border.all(color: defaultColor, width: 0.5)),
-            child: Center(
-              child: Text(
-                details.date.day.toString(),
+            view: CalendarView.month,
+            onLongPress: (details) {
+              final provider =
+                  Provider.of<EventProvider>(context, listen: false);
+              provider.setDate(details.date!);
+            },
+            monthCellBuilder:
+                (BuildContext buildContext, MonthCellDetails details) {
+              final Color defaultColor =
+                  Theme.of(context).brightness == Brightness.dark
+                      ? Colors.black54
+                      : Colors.white;
+              return Container(
+                decoration: BoxDecoration(
+                    border: Border.all(color: defaultColor, width: 0.5)),
+                child: Center(
+                  child: Text(
+                    details.date.day.toString(),
+                  ),
+                ),
+              );
+            },
+            headerStyle: CalendarHeaderStyle(
+                textAlign: TextAlign.center,
+                textStyle:
+                    TextStyle(fontSize: 18, fontStyle: FontStyle.italic)),
+            allowedViews: [
+              CalendarView.week,
+              CalendarView.month,
+            ],
+            timeSlotViewSettings: TimeSlotViewSettings(
+              timeIntervalHeight: 100,
+            ),
+            initialSelectedDate: DateTime.now(),
+            dataSource: EventDataSource(events),
+            showNavigationArrow: true,
+            todayHighlightColor: Colors.red,
+            showCurrentTimeIndicator: true,
+            showWeekNumber: true,
+            weekNumberStyle: WeekNumberStyle(
+              backgroundColor: Colors.red,
+              textStyle: TextStyle(
+                color: Colors.black87,
+                fontSize: 15,
               ),
             ),
-          );
-        },
-        headerStyle: CalendarHeaderStyle(
-            textAlign: TextAlign.center,
-            textStyle: TextStyle(fontSize: 18, fontStyle: FontStyle.italic)),
-        allowedViews: [
-          CalendarView.week,
-          CalendarView.month,
-        ],
-        timeSlotViewSettings: TimeSlotViewSettings(
-          timeIntervalHeight: 100,
-        ),
-        initialSelectedDate: DateTime.now(),
-        dataSource: EventDataSource(events),
-        showNavigationArrow: true,
-        todayHighlightColor: Colors.red,
-        showCurrentTimeIndicator: true,
-        showWeekNumber: true,
-        weekNumberStyle: WeekNumberStyle(
-          backgroundColor: Colors.red,
-          textStyle: TextStyle(
-            color: Colors.black87,
-            fontSize: 15,
-          ),
-        ),
-        showDatePickerButton: true,
-        monthViewSettings: MonthViewSettings(
-            //appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
-            showTrailingAndLeadingDates: false,
-            monthCellStyle: MonthCellStyle(backgroundColor: Colors.transparent),
-            appointmentDisplayCount: 10,
-            showAgenda: true,
-            agendaItemHeight: 70,
-            agendaStyle: AgendaStyle(
-              backgroundColor: Colors.black,
-              dateTextStyle: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-              ),
-              appointmentTextStyle: TextStyle(
-                color: Colors.black,
-              ),
-              dayTextStyle: TextStyle(
-                color: Colors.white,
-                fontSize: 25,
-                fontFamily: 'Source Sans Pro',
-              ),
-            )),
-      )),
+            showDatePickerButton: true,
+            monthViewSettings: MonthViewSettings(
+                //appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
+                showTrailingAndLeadingDates: false,
+                monthCellStyle:
+                    MonthCellStyle(backgroundColor: Colors.transparent),
+                appointmentDisplayCount: 10,
+                showAgenda: true,
+                agendaItemHeight: 70,
+                agendaStyle: AgendaStyle(
+                  backgroundColor: Colors.black,
+                  dateTextStyle: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
+                  appointmentTextStyle: TextStyle(
+                    color: Colors.black,
+                  ),
+                  dayTextStyle: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                    fontFamily: 'Source Sans Pro',
+                  ),
+                )),
+          )),
     );
-    
   }
-  
 }
