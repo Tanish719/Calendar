@@ -102,17 +102,26 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               );
             },
+            scheduleViewSettings: ScheduleViewSettings(
+                weekHeaderSettings: WeekHeaderSettings(
+                  startDateFormat: 'dd MMM',
+                  endDateFormat: 'dd MMM',
+                ),
+                appointmentTextStyle: TextStyle(
+                  color: Colors.black,
+                ),
+                monthHeaderSettings: MonthHeaderSettings(
+                    backgroundColor: Colors.red,
+                    monthTextStyle:
+                        TextStyle(fontSize: 25, fontWeight: FontWeight.bold))),
             headerStyle: CalendarHeaderStyle(
                 textAlign: TextAlign.center,
                 textStyle:
                     TextStyle(fontSize: 18, fontStyle: FontStyle.italic)),
-            allowedViews: [
-              CalendarView.week,
-              CalendarView.month,
-            ],
+            allowedViews: [CalendarView.month, CalendarView.schedule],
+            allowAppointmentResize: true,
             timeSlotViewSettings: TimeSlotViewSettings(
-              timeIntervalHeight: 100,
-            ),
+                timeIntervalHeight: 200, timeIntervalWidth: 200),
             initialSelectedDate: DateTime.now(),
             dataSource: EventDataSource(events),
             showNavigationArrow: true,
@@ -134,7 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     MonthCellStyle(backgroundColor: Colors.transparent),
                 appointmentDisplayCount: 10,
                 showAgenda: true,
-                agendaItemHeight: 70,
+                agendaItemHeight: 55,
                 agendaStyle: AgendaStyle(
                   backgroundColor: Colors.black,
                   dateTextStyle: TextStyle(
@@ -142,8 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     fontSize: 20,
                   ),
                   appointmentTextStyle: TextStyle(
-                    color: Colors.black,
-                  ),
+                      color: Colors.black, fontWeight: FontWeight.bold),
                   dayTextStyle: TextStyle(
                     color: Colors.white,
                     fontSize: 25,

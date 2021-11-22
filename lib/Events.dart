@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:calenderapp/main.dart';
 import 'package:calenderapp/fab.dart';
 import 'package:provider/provider.dart';
 import 'package:calenderapp/event_provider.dart';
+import 'dart:math';
 
 class EventEditingPage extends StatefulWidget {
   final Event? event;
@@ -229,7 +229,9 @@ class _EventEditingPageState extends State<EventEditingPage> {
         from: fromDate,
         to: toDate,
         isAllDay: false,
+        backgroundcolor: randomColor(),
       );
+
       final isEditing = widget.event != null;
       final provider = Provider.of<EventProvider>(context, listen: false);
       if (isEditing) {
@@ -245,17 +247,6 @@ class _EventEditingPageState extends State<EventEditingPage> {
   }
 }
 
-List<Color> randomcolos = [
-  Colors.blue,
-  Colors.pink,
-  Colors.yellow,
-  Colors.lightGreen,
-  Colors.orange,
-  Colors.purple,
-  Colors.brown,
-  Colors.red,
-];
-
 class Event {
   final String title;
   final String description;
@@ -269,6 +260,49 @@ class Event {
       required this.description,
       required this.from,
       required this.to,
-      this.backgroundcolor: Colors.purpleAccent,
+      required this.backgroundcolor,
       this.isAllDay = false});
+}
+
+const List<Color> randomcolors = const <Color>[
+  Colors.red,
+  Colors.redAccent,
+  Colors.deepOrange,
+  Colors.deepOrangeAccent,
+  Colors.orange,
+  Colors.orangeAccent,
+  Colors.amber,
+  Colors.amberAccent,
+  Colors.yellow,
+  Colors.yellowAccent,
+  Colors.lime,
+  Colors.limeAccent,
+  Colors.lightGreen,
+  Colors.lightGreenAccent,
+  Colors.green,
+  Colors.greenAccent,
+  Colors.teal,
+  Colors.tealAccent,
+  Colors.lightBlue,
+  Colors.lightBlueAccent,
+  Colors.blue,
+  Colors.blueAccent,
+  Colors.indigoAccent,
+  Colors.indigo,
+  Colors.deepPurple,
+  Colors.deepPurpleAccent,
+  Colors.purple,
+  Colors.purpleAccent,
+  Colors.pink,
+  Colors.pinkAccent,
+  Colors.brown,
+  Colors.blueGrey,
+];
+
+randomColor() {
+  final col = randomcolors[Random().nextInt(32)];
+
+  print(col);
+
+  return col;
 }
